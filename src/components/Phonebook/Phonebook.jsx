@@ -8,7 +8,6 @@ import { Filter } from "components/Filter/Filter";
 import { LOCAL_KEY } from "contacts/localKey";
 
 const isStorageContacts = JSON.parse(localStorage.getItem(LOCAL_KEY));
-console.log(isStorageContacts);
 
 export class Phonebook extends Component {
 

@@ -6,15 +6,19 @@ import { LOCAL_KEY } from "contacts/localKey";
 export class ContactList extends Component {
 
 	componentDidMount() {
-		localStorage.setItem(LOCAL_KEY, JSON.stringify(this.props.list));
+		this.setLocalStorage(this.props.list)
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		localStorage.setItem(LOCAL_KEY, JSON.stringify(this.props.list));
+	componentDidUpdate() {
+		this.setLocalStorage(this.props.list);
 	}
 
 	componentWillUnmount() {
-		localStorage.setItem(LOCAL_KEY, JSON.stringify([]));
+		this.setLocalStorage([]);
+	}
+
+	setLocalStorage = value => {
+		localStorage.setItem(LOCAL_KEY, JSON.stringify(value));
 	}
 
 	render() {
