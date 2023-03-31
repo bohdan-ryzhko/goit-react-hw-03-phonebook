@@ -5,17 +5,20 @@ import PropTypes from 'prop-types';
 import { ContactList } from "components/ContactList/ContactList";
 import { Filter } from "components/Filter/Filter";
 
+import { LOCAL_KEY } from "contacts/localKey";
+
+const isStorageContacts = JSON.parse(localStorage.getItem(LOCAL_KEY));
+console.log(isStorageContacts);
+
 export class Phonebook extends Component {
 
 	state = {
-		contacts: [],
+		contacts: isStorageContacts || [],
 		filter: "",
 	}
 
 	handlerFilter = ({ target: { value } }) => {
-		this.setState({
-			filter: value,
-		});
+		this.setState({ filter: value });
 	}
 
 	getContacts = data => {
@@ -57,7 +60,7 @@ export class Phonebook extends Component {
 	}
 
 	render() {
-		const { contacts, name } = this.state;
+		const { name } = this.state;
 
 		const filteredContacts = this.getFilteredContacts();
 
@@ -66,7 +69,7 @@ export class Phonebook extends Component {
 				<h1>Phonebook</h1>
 				<ContactForm getContacts={this.getContacts} />
 				{
-					contacts.length > 0
+					filteredContacts.length > 0
 					&&
 					<>
 						<h2>Contacts</h2>
